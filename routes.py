@@ -9,7 +9,12 @@ def load_user(user_id):
 
 @app.route('/')
 def home():
-    return render_template('home.html', products=products.values(), categories=categories)
+    selected_category = request.args.get('category')
+    filtered_products = [
+        product for product in products.values()
+        if not selected_category or product.category == selected_category
+    ]
+    return render_template('home.html', products=filtered_products, categories=categories)
 
 @app.route('/product/<int:product_id>')
 def product(product_id):

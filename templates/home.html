@@ -6,9 +6,11 @@
     <div class="row">
         {% for category, banner in categories.items() %}
         <div class="col-md-4 mb-4">
-            <div class="category-banner" style="background-image: url('{{ banner }}')">
-                <h3 class="category-banner-text">{{ category }}</h3>
-            </div>
+            <a href="{{ url_for('home', category=category) }}" class="text-decoration-none">
+                <div class="category-banner" style="background-image: url('{{ banner }}')">
+                    <h3 class="category-banner-text">{{ category }}</h3>
+                </div>
+            </a>
         </div>
         {% endfor %}
     </div>
