@@ -23,16 +23,16 @@
                         {{ item.product.name }}
                     </div>
                 </td>
-                <td>${{ "%.2f"|format(item.product.price) }}</td>
+                <td>₹{{ "%.2f"|format(item.product.price) }}</td>
                 <td>{{ item.quantity }}</td>
-                <td>${{ "%.2f"|format(item.product.price * item.quantity) }}</td>
+                <td>₹{{ "%.2f"|format(item.product.price * item.quantity) }}</td>
             </tr>
             {% endfor %}
         </tbody>
         <tfoot>
             <tr>
                 <td colspan="3" class="text-end"><strong>Total:</strong></td>
-                <td>${{ "%.2f"|format(total) }}</td>
+                <td>₹{{ "%.2f"|format(total) }}</td>
             </tr>
         </tfoot>
     </table>

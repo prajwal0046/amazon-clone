@@ -1,19 +1,24 @@
-/* Amazon-like styling */
+/* MyStore styling */
 :root {
-    --amazon-orange: #FF9900;
-    --amazon-dark: #232F3E;
+    --store-primary: #FF9900;
+    --store-dark: #232F3E;
 }
 
 body {
     font-family: Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .navbar {
-    background-color: var(--amazon-dark);
+    background-color: var(--store-dark);
 }
 
 .navbar-brand {
     color: white !important;
+    font-size: 1.5rem;
+    font-weight: bold;
 }
 
 .search-bar {
@@ -22,8 +27,8 @@ body {
 }
 
 .btn-amazon {
-    background-color: var(--amazon-orange);
-    border-color: var(--amazon-orange);
+    background-color: var(--store-primary);
+    border-color: var(--store-primary);
     color: black;
 }
 
@@ -35,11 +40,13 @@ body {
 .product-card {
     transition: transform 0.2s;
     height: 100%;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 .product-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
 .product-image {
@@ -53,6 +60,8 @@ body {
     background-position: center;
     margin-bottom: 2rem;
     position: relative;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 .category-banner-text {
@@ -63,19 +72,17 @@ body {
     text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
-.cart-overlay {
-    position: fixed;
-    top: 60px;
-    right: 20px;
-    background: white;
-    padding: 20px;
-    border-radius: 4px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    display: none;
-    z-index: 1000;
+.cart-badge {
+    background-color: var(--store-primary);
+    color: black;
 }
 
-.cart-badge {
-    background-color: var(--amazon-orange);
-    color: black;
+.alert {
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.form-control:focus {
+    border-color: var(--store-primary);
+    box-shadow: 0 0 0 0.2rem rgba(255, 153, 0, 0.25);
 }

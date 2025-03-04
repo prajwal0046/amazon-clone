@@ -8,7 +8,7 @@
     <div class="col-md-6">
         <h1>{{ product.name }}</h1>
         <p class="lead">{{ product.description }}</p>
-        <h2 class="text-primary">${{ "%.2f"|format(product.price) }}</h2>
+        <h2 class="text-primary">₹{{ "%.2f"|format(product.price) }}</h2>
         <div class="mt-4">
             <form action="{{ url_for('add_to_cart', product_id=product.id) }}" method="post">
                 <button type="submit" class="btn btn-lg btn-amazon">Add to Cart</button>
@@ -19,7 +19,7 @@
             <ul class="list-unstyled">
                 <li>Category: {{ product.category }}</li>
                 <li>In Stock: Yes</li>
-                <li>Shipping: Free with Prime</li>
+                <li>Fast Delivery Available</li>
             </ul>
         </div>
     </div>

@@ -16,34 +16,41 @@ def product(product_id):
     product = products.get(product_id)
     if product:
         return render_template('product.html', product=product)
+    flash('Product not found')
     return redirect(url_for('home'))
 
 @app.route('/cart')
 def cart():
-    cart_items = session.get('cart', {})
-    cart_products = []
+    cart_items = []
     total = 0
-    for product_id, quantity in cart_items.items():
+    cart_data = session.get('cart', {})
+
+    for product_id, quantity in cart_data.items():
         product = products.get(int(product_id))
         if product:
-            cart_products.append({
+            cart_items.append({
                 'product': product,
                 'quantity': quantity
             })
             total += product.price * quantity
-    return render_template('cart.html', cart_items=cart_products, total=total)
+
+    return render_template('cart.html', cart_items=cart_items, total=total)
 
 @app.route('/add_to_cart/<int:product_id>', methods=['POST'])
 def add_to_cart(product_id):
     if str(product_id) not in session.get('cart', {}):
-        session['cart'] = session.get('cart', {})
-        session['cart'][str(product_id)] = 1
-    return redirect(url_for('cart'))
+        cart = session.get('cart', {})
+        cart[str(product_id)] = 1
+        session['cart'] = cart
+        flash('Product added to cart!')
+    return redirect(request.referrer or url_for('home'))
 
 @app.route('/checkout')
 @login_required
 def checkout():
-    return render_template('checkout.html')
+    cart_data = session.get('cart', {})
+    total = sum(products[int(pid)].price * qty for pid, qty in cart_data.items())
+    return render_template('checkout.html', total=total)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -53,6 +60,7 @@ def login():
         user = next((u for u in users.values() if u.email == email), None)
         if user and user.check_password(password):
             login_user(user)
+            flash('Successfully logged in!')
             return redirect(url_for('home'))
         flash('Invalid email or password')
     return render_template('login.html')
@@ -67,6 +75,7 @@ def register():
             user_id = len(users) + 1
             users[user_id] = User(user_id, username, email, password)
             login_user(users[user_id])
+            flash('Registration successful!')
             return redirect(url_for('home'))
         flash('Email already registered')
     return render_template('register.html')
