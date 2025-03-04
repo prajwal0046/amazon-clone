@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h2>Checkout</h2>
+        <form class="needs-validation" novalidate>
+            <h4 class="mb-3">Shipping Address</h4>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label for="firstName" class="form-label">First name</label>
+                    <input type="text" class="form-control" id="firstName" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="lastName" class="form-label">Last name</label>
+                    <input type="text" class="form-control" id="lastName" required>
+                </div>
+                <div class="col-12">
+                    <label for="address" class="form-label">Address</label>
+                    <input type="text" class="form-control" id="address" required>
+                </div>
+                <div class="col-md-5">
+                    <label for="country" class="form-label">Country</label>
+                    <select class="form-select" id="country" required>
+                        <option value="">Choose...</option>
+                        <option>United States</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="state" class="form-label">State</label>
+                    <select class="form-select" id="state" required>
+                        <option value="">Choose...</option>
+                        <option>California</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="zip" class="form-label">Zip</label>
+                    <input type="text" class="form-control" id="zip" required>
+                </div>
+            </div>
+
+            <hr class="my-4">
+
+            <h4 class="mb-3">Payment</h4>
+            <div class="row gy-3">
+                <div class="col-md-6">
+                    <label for="cc-name" class="form-label">Name on card</label>
+                    <input type="text" class="form-control" id="cc-name" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="cc-number" class="form-label">Credit card number</label>
+                    <input type="text" class="form-control" id="cc-number" required>
+                </div>
+                <div class="col-md-3">
+                    <label for="cc-expiration" class="form-label">Expiration</label>
+                    <input type="text" class="form-control" id="cc-expiration" required>
+                </div>
+                <div class="col-md-3">
+                    <label for="cc-cvv" class="form-label">CVV</label>
+                    <input type="text" class="form-control" id="cc-cvv" required>
+                </div>
+            </div>
+
+            <hr class="my-4">
+
+            <button class="w-100 btn btn-amazon btn-lg" type="submit">Place Order</button>
+        </form>
+    </div>
+    <div class="col-md-4">
+        <h4 class="mb-3">Order Summary</h4>
+        <div class="card">
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-6">Subtotal:</dt>
+                    <dd class="col-6 text-end">${{ "%.2f"|format(total) }}</dd>
+                    
+                    <dt class="col-6">Shipping:</dt>
+                    <dd class="col-6 text-end">Free</dd>
+                    
+                    <dt class="col-6">Tax:</dt>
+                    <dd class="col-6 text-end">${{ "%.2f"|format(total * 0.1) }}</dd>
+                    
+                    <dt class="col-6 border-top pt-2">Total:</dt>
+                    <dd class="col-6 text-end border-top pt-2"><strong>${{ "%.2f"|format(total * 1.1) }}</strong></dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
