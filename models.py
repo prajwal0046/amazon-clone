@@ -24,22 +24,23 @@ class Product:
 # In-memory storage
 users = {}
 products = {
-    1: Product(1, "Smart Watch", 199.99, "Advanced smartwatch with health tracking", "Electronics", 
+    1: Product(1, "Smart Watch", 19999.99, "Advanced smartwatch with health tracking", "Electronics", 
                "https://images.unsplash.com/photo-1523275335684-37898b6baf30"),
-    2: Product(2, "Headphones", 149.99, "Premium wireless headphones", "Electronics",
+    2: Product(2, "Headphones", 14999.99, "Premium wireless headphones", "Electronics",
                "https://images.unsplash.com/photo-1505740420928-5e560c06d30e"),
-    3: Product(3, "Camera", 599.99, "Professional DSLR camera", "Electronics",
+    3: Product(3, "Camera", 59999.99, "Professional DSLR camera", "Electronics",
                "https://images.unsplash.com/photo-1596460107916-430662021049"),
-    4: Product(4, "Smartphone", 699.99, "Latest smartphone model", "Electronics",
+    4: Product(4, "Smartphone", 69999.99, "Latest smartphone model", "Electronics",
                "https://images.unsplash.com/photo-1615615228002-890bb61cac6e"),
-    5: Product(5, "Laptop", 999.99, "High-performance laptop", "Electronics",
+    5: Product(5, "Laptop", 99999.99, "High-performance laptop", "Electronics",
                "https://images.unsplash.com/photo-1616423641454-caa695af6a0f"),
 }
 
+# Categories with banner images
 categories = {
-    "Electronics": "https://images.unsplash.com/photo-1558770147-a0e2842c5ea1",
-    "Fashion": "https://images.unsplash.com/photo-1558770147-68c0607adb26",
-    "Home": "https://images.unsplash.com/photo-1558770147-d2a384e1ad85",
-    "Books": "https://images.unsplash.com/photo-1524871729950-c4e886edc1f9",
-    "Sports": "https://images.unsplash.com/photo-1621777106818-aa0303a2adc7"
+    "Electronics": "https://images.unsplash.com/photo-1468495244123-6c6c332eeece",
+    "Fashion": "https://images.unsplash.com/photo-1483985988355-763728e1935b",
+    "Home": "https://images.unsplash.com/photo-1484154218962-a197022b5858",
+    "Books": "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f",
+    "Sports": "https://images.unsplash.com/photo-1517649763962-0c623066013b"
 }

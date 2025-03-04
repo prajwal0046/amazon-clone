@@ -6,7 +6,7 @@
     <div class="row">
         {% for category, banner in categories.items() %}
         <div class="col-md-4 mb-4">
-            <a href="{{ url_for('home', category=category) }}" class="text-decoration-none">
+            <a href="{{ url_for('home', category=category) }}" class="text-decoration-none category-link">
                 <div class="category-banner" style="background-image: url('{{ banner }}')">
                     <h3 class="category-banner-text">{{ category }}</h3>
                 </div>
@@ -16,7 +16,13 @@
     </div>
 </div>
 
-<h2 class="mb-4">Featured Products</h2>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>{% if request.args.get('category') %}{{ request.args.get('category') }}{% else %}Featured Products{% endif %}</h2>
+    {% if request.args.get('category') %}
+        <a href="{{ url_for('home') }}" class="btn btn-outline-secondary">View All Products</a>
+    {% endif %}
+</div>
+
 <div class="row">
     {% for product in products %}
     <div class="col-md-3 mb-4">

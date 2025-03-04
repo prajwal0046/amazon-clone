@@ -1,5 +1,6 @@
 from flask import render_template, redirect, url_for, request, flash, session
 from flask_login import login_user, logout_user, login_required, current_user
+import logging
 from app import app, login_manager
 from models import User, users, products, categories
 
@@ -10,10 +11,16 @@ def load_user(user_id):
 @app.route('/')
 def home():
     selected_category = request.args.get('category')
-    filtered_products = [
-        product for product in products.values()
-        if not selected_category or product.category == selected_category
-    ]
+    logging.debug(f"Selected category: {selected_category}")
+
+    if selected_category:
+        filtered_products = [p for p in products.values() if p.category == selected_category]
+        logging.debug(f"Found {len(filtered_products)} products in category {selected_category}")
+    else:
+        filtered_products = list(products.values())
+        logging.debug(f"Showing all {len(filtered_products)} products")
+
+    logging.debug(f"Available categories: {list(categories.keys())}")
     return render_template('home.html', products=filtered_products, categories=categories)
 
 @app.route('/product/<int:product_id>')

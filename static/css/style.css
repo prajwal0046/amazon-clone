@@ -54,6 +54,16 @@ body {
     object-fit: cover;
 }
 
+/* Additional styles for category functionality */
+.category-link {
+    display: block;
+    transition: transform 0.2s;
+}
+
+.category-link:hover {
+    transform: scale(1.02);
+}
+
 .category-banner {
     height: 200px;
     background-size: cover;
@@ -62,6 +72,17 @@ body {
     position: relative;
     border-radius: 8px;
     overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.category-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 100%);
 }
 
 .category-banner-text {
@@ -70,6 +91,14 @@ body {
     left: 20px;
     color: white;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.category-banner:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
 }
 
 .cart-badge {
