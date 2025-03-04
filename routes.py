@@ -1,12 +1,12 @@
 from flask import render_template, redirect, url_for, request, flash, session
 from flask_login import login_user, logout_user, login_required, current_user
 import logging
-from app import app, login_manager, db
-from models import User, Product, Order, OrderItem, categories
+from app import app, login_manager
+from models import User, users, products, categories
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(int(user_id))
+    return users.get(int(user_id))
 
 @app.route('/')
 def home():
@@ -14,10 +14,10 @@ def home():
     logging.debug(f"Selected category: {selected_category}")
 
     if selected_category:
-        filtered_products = Product.query.filter_by(category=selected_category).all()
+        filtered_products = [p for p in products.values() if p.category == selected_category]
         logging.debug(f"Found {len(filtered_products)} products in category {selected_category}")
     else:
-        filtered_products = Product.query.all()
+        filtered_products = list(products.values())
         logging.debug(f"Showing all {len(filtered_products)} products")
 
     logging.debug(f"Available categories: {list(categories.keys())}")
@@ -25,8 +25,11 @@ def home():
 
 @app.route('/product/<int:product_id>')
 def product(product_id):
-    product = Product.query.get_or_404(product_id)
-    return render_template('product.html', product=product)
+    product = products.get(product_id)
+    if product:
+        return render_template('product.html', product=product)
+    flash('Product not found')
+    return redirect(url_for('home'))
 
 @app.route('/cart')
 def cart():
@@ -35,7 +38,7 @@ def cart():
     cart_data = session.get('cart', {})
 
     for product_id, quantity in cart_data.items():
-        product = Product.query.get(int(product_id))
+        product = products.get(int(product_id))
         if product:
             cart_items.append({
                 'product': product,
@@ -60,7 +63,7 @@ def checkout():
     cart_data = session.get('cart', {})
     total = 0
     for pid, qty in cart_data.items():
-        product = Product.query.get(int(pid))
+        product = products.get(int(pid))
         if product:
             total += product.price * qty
     return render_template('checkout.html', total=total)
@@ -70,7 +73,7 @@ def login():
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
-        user = User.query.filter_by(email=email).first()
+        user = next((u for u in users.values() if u.email == email), None)
         if user and user.check_password(password):
             login_user(user)
             flash('Successfully logged in!')
@@ -85,18 +88,13 @@ def register():
         email = request.form.get('email')
         password = request.form.get('password')
 
-        if User.query.filter_by(email=email).first():
-            flash('Email already registered')
-            return render_template('register.html')
-
-        user = User(username=username, email=email)
-        user.set_password(password)
-        db.session.add(user)
-        db.session.commit()
-
-        login_user(user)
-        flash('Registration successful!')
-        return redirect(url_for('home'))
+        if not any(u.email == email for u in users.values()):
+            user_id = len(users) + 1
+            users[user_id] = User(user_id, username, email, password)
+            login_user(users[user_id])
+            flash('Registration successful!')
+            return redirect(url_for('home'))
+        flash('Email already registered')
     return render_template('register.html')
 
 @app.route('/logout')
