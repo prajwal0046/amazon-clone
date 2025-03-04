@@ -24,16 +24,37 @@ class Product:
 # In-memory storage
 users = {}
 products = {
+    # Electronics
     1: Product(1, "Smart Watch", 19999.99, "Advanced smartwatch with health tracking", "Electronics", 
                "https://images.unsplash.com/photo-1523275335684-37898b6baf30"),
     2: Product(2, "Headphones", 14999.99, "Premium wireless headphones", "Electronics",
                "https://images.unsplash.com/photo-1505740420928-5e560c06d30e"),
     3: Product(3, "Camera", 59999.99, "Professional DSLR camera", "Electronics",
                "https://images.unsplash.com/photo-1596460107916-430662021049"),
-    4: Product(4, "Smartphone", 69999.99, "Latest smartphone model", "Electronics",
-               "https://images.unsplash.com/photo-1615615228002-890bb61cac6e"),
-    5: Product(5, "Laptop", 99999.99, "High-performance laptop", "Electronics",
-               "https://images.unsplash.com/photo-1616423641454-caa695af6a0f"),
+
+    # Fashion
+    4: Product(4, "Designer Watch", 24999.99, "Luxury wristwatch with premium design", "Fashion",
+               "https://images.unsplash.com/photo-1523275335684-37898b6baf30"),
+    5: Product(5, "Leather Bag", 12999.99, "Premium leather handbag", "Fashion",
+               "https://images.unsplash.com/photo-1548036328-c9fa89d128fa"),
+
+    # Home
+    6: Product(6, "Smart Speaker", 9999.99, "Voice-controlled home assistant", "Home",
+               "https://images.unsplash.com/photo-1512223792601-592a9809eed4"),
+    7: Product(7, "Coffee Maker", 7999.99, "Premium coffee brewing system", "Home",
+               "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5"),
+
+    # Books
+    8: Product(8, "Programming Guide", 1499.99, "Comprehensive coding handbook", "Books",
+               "https://images.unsplash.com/photo-1532012197267-da84d127e765"),
+    9: Product(9, "Novel Collection", 2999.99, "Bestselling fiction series", "Books",
+               "https://images.unsplash.com/photo-1481627834876-b7833e8f5570"),
+
+    # Sports
+    10: Product(10, "Yoga Mat", 1999.99, "Professional exercise mat", "Sports",
+                "https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f"),
+    11: Product(11, "Dumbbells Set", 4999.99, "Adjustable weight training set", "Sports",
+                "https://images.unsplash.com/photo-1586401100295-7a8096fd0a64")
 }
 
 # Categories with banner images
